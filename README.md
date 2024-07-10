@@ -22,7 +22,7 @@ In the ask phase, I am considering the problem I am trying to solve and how my i
 
 ## Prepare
 
-In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Motivate International Inc. under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Motivate International Inc. is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
+In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Divvy under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Divvy is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
 
 The data contains information on:
 
@@ -33,7 +33,7 @@ The data contains information on:
 
 This information should be sufficient to analyze the differences in bike use between annual members and casual riders by day and time of trip start, trip duration, trip start and end station, trip direction, trip length, and rideable type, and discover potential solutions and offers for converting casual riders into annual members.
 
-Motivate International Inc. provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.  
+Divvy provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.  
 
 All CSV files had the same organization, namely 13 columns with the same names: 
 
@@ -81,10 +81,10 @@ In the process phase, I began with checking the data for potential inconsistenci
 - Checking the consistency of station names:
     - There are 1638 unique station names;
     - Since there are a lot of unique station names, I checked the consistency of the station names with the help of station ids, namely I returned station ids with multiple station names:
-        - There are 81 station ids with 2 station names (except one case with 4 station names), of which 8 station ids have multiple names due to inconsistent typing, for example, Buckingham - Fountain" and Buckingham Fountain, or Grace & Cicero"", Grace St & Cicero Ave, and can be fixed, and the rest 73 station ids have two different station names, which is difficult to fix due to a lack of information.
+        - There are 81 station ids with 2 station names (except one station id with 4 station names), of which 8 station ids have multiple names due to inconsistent typing, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, and the rest 73 station ids have two different station names, which is difficult to fix due to a lack of information.
     - I also checked the number of observations in trip data for those 81 station ids with multiple station names to see if I could remove them from the table without impacting the data and analysis:
         - There are 378 235 such observations.
-    - The second way that I used to check the consistency of the station names was comparing trip_data stations with stations from the data downloaded from Chichago data portal:
+    - The second way that I used to check the consistency of the station names was comparing stations with separate station information data downloaded from the Divvy website:
     - 
  
 
