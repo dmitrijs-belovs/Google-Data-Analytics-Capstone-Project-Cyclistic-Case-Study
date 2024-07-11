@@ -111,7 +111,7 @@ FROM trip_data;
 			end_station_id
 		HAVING COUNT(DISTINCT end_station_name) > 1);
 
--- Comparing stations with station information downloaded from the Divvy website
+	-- Comparing stations with station information downloaded from the Divvy website
 
 		-- Creating a table for the import of station data
 		CREATE TABLE stations (
