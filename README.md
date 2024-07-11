@@ -61,37 +61,50 @@ To prepare the data for processing, I imported it into the pgAdmin environment b
 
 In the process phase, I began with checking the data for potential inconsistencies:
 
-- Returning the number of observations:
-    - 5 743 278.
-- Checking for missing values in all columns:
-    - start_station_name and start_station_id: 905 237 missing values;
-    - end_station_name and end_station_id: 956 579 missing values;
-    - end_lat and eng_lng: 7684 missing values;
-    - other columns: no missing values.
-- Checking for duplicate values:
-    - no duplicate values.
-- Checking the consistency of ride_id column value lengths:
-    - all ride ids have the same length.
-- Checking the consistency of rideable_type column values:
-    - there are 3 unique rideable_type values: "classic_bike", "docked_bike", and "electric_bike", thus there are no spelling errors.
-- Checking the range of started_at and ended_at column values:
-    - earliest started trip: "2023-06-01 00:00:44" and latest startet trip: "2024-05-31 23:59:57";
-    - earliest ended trip: "2023-06-01 00:02:56" and latest ended trip: "2024-06-02 00:56:55";
-      - the trip data falls into the period from June 2023 through May 2024, except there are several trips that started at the last minutes of May 2024 and, logically, ended in June 2024, thus, there are no spelling errors.
-- Checking the consistency of station names:
+- **Returning the number of observations:**
+    - 5 743 278
+- **Checking for missing values in all columns:**
+    - start_station_name and start_station_id: 905 237 missing values
+    - end_station_name and end_station_id: 956 579 missing values
+    - end_lat and eng_lng: 7684 missing values
+    - other columns: no missing values
+- **Checking for duplicate values:**
+    - no duplicate values
+- **Checking the consistency of ride_id column value lengths:**
+    - All ride IDs have the same length.
+- **Checking the consistency of rideable_type column values:**
+    - There are 3 unique rideable_type values: "classic_bike", "docked_bike", and "electric_bike", thus there are no spelling errors.
+- **Checking the range of started_at and ended_at column values:**
+    - earliest started trip: "2023-06-01 00:00:44" and latest startet trip: "2024-05-31 23:59:57"
+    - earliest ended trip: "2023-06-01 00:02:56" and latest ended trip: "2024-06-02 00:56:55"
+    - The trip data falls into the period from June 2023 through May 2024; there are no trips that started before and ended during the selected period, but there are trips that started at the last minutes of May 2024 and, logically, ended in June 2024 (there are 211 such trips), thus, there are no spelling errors, and trips that ended after the selected period don't necessarily need to be removed. 
+- **Checking the consistency of station names:**
     - There are 1638 unique station names;
-    - Since there are a lot of unique station names, I checked the consistency of the station names with the help of station ids, namely I returned station ids with multiple station names:
-        - There are 81 station ids with 2 station names (except one station id with 4 station names), of which 8 station ids have multiple names due to inconsistent typing, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, and the rest 73 station ids have two different station names, which is difficult to fix due to a lack of information.
-    - I also checked the number of observations in trip data for those 81 station ids with multiple station names to see if I could remove them from the table without impacting the data and analysis:
-        - There are 378 235 such observations.
-    - The second way that I used to check the consistency of the station names was comparing stations with separate station information data downloaded from the Divvy website:
-    - 
- 
-
-- Checking the range of stations latitude and longitude values
+    - Since there are a lot of unique station names, I checked the consistency of the station names with the help of station IDs, namely I returned station IDs with multiple station names:
+        - There are 81 station IDs with 2 station names (except one station ID with 4 station names), of which 8 station IDs have multiple names due to inconsistent spelling, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, but the rest 73 station IDs have two different station names, which is difficult to fix due to a lack of information and not necessarily need to be, because I will not use station IDs during analysis.
+    - I also checked the number of observations in trip data for those 81 station IDs with multiple station names to see if I could remove them from the table:
+        - There are 378 235 such observations, and this amount is too large to be simply removed, and it can affect the analysis of several stations that may contribute to the overall analysis.
+    - The second way that I used to check the consistency of the station names was comparing stations with station information downloaded from the Divvy website and imported as a second table in pgadmin environment:
+        - All stations in a newly imported table are unique, and station IDs don't have multiple station names, however, more than half of stations don't have IDs, which makes it difficult to fix the trip data stations with the help of the stations table information;
+        - There are 48 stations in the trip_data table that don't have a match in the stations table, however, that doesn't mean that all of them have spelling inconsistencies, because some stations in the stations table also have spelling irregularities;
+        - These 48 stations have 57 189 observations in the trip data table.
+    - So the best solution for me was to fix the station names for the 9 station IDs with multiple station names mentioned earlier and don't remove other observations.
+- **Checking the range of stations latitude and longitude values:**
     - minimum latitude: 0 and maximum latitude: 42.18
     - minimum longitute: -88.16 and maximum longitute: 0
-        - there are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago
-            - after checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that needs to be removed.
-- Checking the consistency of member_casual column values
-    - as expected, there are 2 unique member_casual values: "member" and "casual", thus there are no spelling errors.
+        - There are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago.
+            - After checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that need to be removed.
+- **Checking the consistency of member_casual column values:**
+    - As expected, there are 2 unique member_casual values: "member" and "casual", thus there are no spelling errors.
+
+Next, based on an initial check of the data, I performed data cleaning:
+
+- **Removing observations with missing values.**
+- **Fixing inconsistent spelling of station names for 8 station IDs with multiple station names.**
+- **Removing observations with zero latitude and longitude values.**
+
+After the data cleaning, I got 4 314 777 observations.
+
+
+
+
