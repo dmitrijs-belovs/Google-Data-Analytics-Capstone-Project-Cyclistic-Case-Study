@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), process, analyse, share, and act. I used PostgreSQL in pgAdmin 4 for data preparation, processing, and exploration, and Tableau for data analysis and visualization. Although, to some extent, all phases of analysis can be done using only one of these tools, I decided to use both to demonstrate the dynamic skills acquired in the certificate and necessary for the data analyst job.
+This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), process, analyse, share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing (and also for analysis, with the sole purpose of more fully demonstrating my SQL skills, without commenting on the analysis insights), and Tableau for data analysis and visualization.
+
+The analysis phace is also done I also explored and analyzed the data using PostgreSQL to demonstrate my SQL skills more comprehensively.
 
 ## Scenario
 
@@ -21,6 +23,8 @@ Moreno has assigned me the first question to answer: How do annual members and c
 In the ask phase, I am considering the problem I am trying to solve and how my insights can drive business decisions. The problem or business task is already defined by Moreno: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently? However, I need to keep in mind the business task and the other guiding questions when answering the question assigned to me to extract and present the most useful, actionable data insights. 
 
 ## Prepare
+
+#### [SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
 
 In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Divvy under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Divvy is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
 
@@ -53,13 +57,11 @@ All CSV files had the same organization, namely 13 columns with the same names:
 
 To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the trip data from 12 CSV files to the created table.
 
-#### [SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
-
 ## Process
 
-#### [SQL query executed in the process phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
+#### [SQL query executed in the process phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/process.sql)
 
-In the process phase, I began with checking the data for potential inconsistencies:
+In the process phase, I am checked, cleaned and manipulated the data. I began with checking the data for potential inconsistencies:
 
 - **Returning the number of observations:**
     - 5 743 278
@@ -100,10 +102,27 @@ In the process phase, I began with checking the data for potential inconsistenci
 Next, based on an initial check of the data, I performed data cleaning:
 
 - **Removing observations with missing values.**
-- **Fixing inconsistent spelling of station names for 8 station IDs with multiple station names.**
+- **Fixing inconsistent spelling of station names for 8 station IDs.**
 - **Removing observations with zero latitude and longitude values.**
 
-After the data cleaning, I got 4 314 777 observations.
+The last step of the process phace was manipulating the data:
+
+- **Adding ride start month, day, day of week, and hour columns.**
+- **Adding ride_length column.**
+
+After adding ride length column, I performed additional data check:
+
+- **Checking the range of ride_length column:**
+    - shortest trip: "-00:54:34", longest trip: "7 days 17:52:16"
+    - Since there are possible errors and outliers, I checked trips that are shorter than a minute and longer than 24 hours:
+        - There are 76 952 trip shorter than a minute and longer than 24 hours, of which 76 792 shorter than a minute (with 72 negative values) and 160 longer than 24 hours.
+    - Trips shorter than a minute might be errors or test rides, and trips that are longer than 24 hours migth be errors or extreme cases, thus, it is better to exclude them.
+    - I also checked if start_station and end_station are the same for trips shorter than a minute:
+        - From 76 792 observations with ride length shorter than one minute, 72 481 are started and ended at the same station, which to some extent can confirm that they might be errors or test rides.
+
+In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 237 825 observations.
+
+## Analyze
 
 
 
