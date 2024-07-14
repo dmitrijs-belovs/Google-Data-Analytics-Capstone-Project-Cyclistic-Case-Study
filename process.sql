@@ -311,7 +311,7 @@ SELECT *
 FROM trip_data
 LIMIT 10;
 
--- Checking the ride_lentgh column
+-- Checking the ride_length column
 	-- Checking the range of ride lengths
 	SELECT 
 		ARRAY[MIN(ride_length), MAX(ride_length)] AS shortest_and_longest_trip
