@@ -2,9 +2,7 @@
 
 ## Introduction
 
-This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), process, analyse, share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing (and also for analysis, with the sole purpose of more fully demonstrating my SQL skills, without commenting on the analysis insights), and Tableau for data analysis and visualization.
-
-The analysis phace is also done I also explored and analyzed the data using PostgreSQL to demonstrate my SQL skills more comprehensively.
+This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau for data analysis and visualization. Although, to some extent, analysis can be done using only one of these tools, I chose to use both to reflect the dynamic skills learned in the certificate and necessary for the data analyst job.
 
 ## Scenario
 
@@ -26,7 +24,7 @@ In the ask phase, I am considering the problem I am trying to solve and how my i
 
 #### [SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
 
-In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Divvy under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Divvy is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
+In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Divvy under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Divvy is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, without getting into details, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
 
 The data contains information on:
 
@@ -65,21 +63,27 @@ In the process phase, I am checked, cleaned and manipulated the data. I began wi
 
 - **Returning the number of observations:**
     - 5 743 278
+
 - **Checking for missing values in all columns:**
     - start_station_name and start_station_id: 905 237 missing values
     - end_station_name and end_station_id: 956 579 missing values
     - end_lat and eng_lng: 7684 missing values
     - other columns: no missing values
+
 - **Checking for duplicate values:**
     - no duplicate values
+
 - **Checking the consistency of ride_id column value lengths:**
     - All ride IDs have the same length.
+
 - **Checking the consistency of rideable_type column values:**
     - There are 3 unique rideable_type values: "classic_bike", "docked_bike", and "electric_bike", thus there are no spelling errors.
+
 - **Checking the range of started_at and ended_at column values:**
     - earliest started trip: "2023-06-01 00:00:44" and latest startet trip: "2024-05-31 23:59:57"
     - earliest ended trip: "2023-06-01 00:02:56" and latest ended trip: "2024-06-02 00:56:55"
-    - The trip data falls into the period from June 2023 through May 2024; there are no trips that started before and ended during the selected period, but there are trips that started at the last minutes of May 2024 and, logically, ended in June 2024 (there are 211 such trips), thus, there are no spelling errors, and trips that ended after the selected period don't necessarily need to be removed. 
+    - The trip data falls into the period from June 2023 through May 2024; there are no trips that started before and ended during the selected period, but there are trips that started at the last minutes of May 2024 and, logically, ended in June 2024 (there are 211 such trips), thus, there are no spelling errors, and trips that ended after the selected period don't necessarily need to be removed.
+
 - **Checking the consistency of station names:**
     - There are 1638 unique station names;
     - Since there are a lot of unique station names, I checked the consistency of the station names with the help of station IDs, namely I returned station IDs with multiple station names:
@@ -91,11 +95,13 @@ In the process phase, I am checked, cleaned and manipulated the data. I began wi
         - There are 48 stations in the trip_data table that don't have a match in the stations table, however, that doesn't mean that all of them have spelling inconsistencies, because some stations in the stations table also have spelling irregularities;
         - These 48 stations have 57 189 observations in the trip data table.
     - So the best solution for me was to fix the station names for the 9 station IDs with multiple station names mentioned earlier and don't remove other observations.
+
 - **Checking the range of stations latitude and longitude values:**
     - minimum latitude: 0 and maximum latitude: 42.18
     - minimum longitute: -88.16 and maximum longitute: 0
-        - There are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago.
-            - After checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that need to be removed.
+    - There are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago.
+      - After checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that need to be removed.
+
 - **Checking the consistency of member_casual column values:**
     - As expected, there are 2 unique member_casual values: "member" and "casual", thus there are no spelling errors.
 
@@ -123,7 +129,5 @@ After adding ride length column, I performed additional data check:
 In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 237 825 observations.
 
 ## Analyze
-
-
 
 
