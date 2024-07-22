@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau for data analysis and visualization. Although, to some extent, analysis can be done using only one of these tools, I chose to use both to reflect the dynamic skills learned in the certificate and necessary for the data analyst job.
+This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis. Although, to some extent, the analysis can be done using only one of these tools, I chose to use both to reflect the dynamic skills learned in the certificate and necessary for the data analyst job.
 
 ## Scenario
 
@@ -59,7 +59,11 @@ To prepare the data for processing, I imported it into the pgAdmin environment b
 
 #### [SQL query executed in the process phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/process.sql)
 
-In the process phase, I am checked, cleaned and manipulated the data. I began with checking the data for potential inconsistencies:
+In the process phase, I am checked, cleaned and manipulated the data. 
+
+### Checking the data
+
+I began with checking the data for potential inconsistencies:
 
 - **Returning the number of observations:**
     - 5 743 278
@@ -104,6 +108,8 @@ In the process phase, I am checked, cleaned and manipulated the data. I began wi
 
 - **Checking the consistency of member_casual column values:**
     - As expected, there are 2 unique member_casual values: "member" and "casual", thus there are no spelling errors.
+ 
+### Cleaning the data
 
 Next, based on an initial check of the data, I performed data cleaning:
 
@@ -111,16 +117,17 @@ Next, based on an initial check of the data, I performed data cleaning:
 - **Fixing inconsistent spelling of station names for 8 station IDs.**
 - **Removing observations with zero latitude and longitude values.**
 
+### Manipulating the data
+
 The last step of the process phace was manipulating the data:
 
-- **Adding ride start month, day, day of week, and hour columns.**
-- **Adding ride_length column.**
+- **Adding ride_length column (in minutes).**
 
 After adding ride length column, I performed additional data check:
 
 - **Checking the range of ride_length column:**
-    - shortest trip: "-00:54:34", longest trip: "7 days 17:52:16"
-    - Since there are possible errors and outliers, I checked trips that are shorter than a minute and longer than 24 hours:
+    - shortest trip: "-54.57", longest trip: "11152.27"
+    - Since there are possible errors and outliers, I checked trips that are shorter than a minute and longer than 1440 minutes (24 hours):
         - There are 76 952 trip shorter than a minute and longer than 24 hours, of which 76 792 shorter than a minute (with 72 negative values) and 160 longer than 24 hours.
     - Trips shorter than a minute might be errors or test rides, and trips that are longer than 24 hours migth be errors or extreme cases, thus, it is better to exclude them.
     - I also checked if start_station and end_station are the same for trips shorter than a minute:
@@ -129,5 +136,13 @@ After adding ride length column, I performed additional data check:
 In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 237 825 observations.
 
 ## Analyze
+
+In the analyze phace, I vizualized and analyzed the data.
+
+
+
+
+
+
 
 
