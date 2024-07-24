@@ -2,16 +2,7 @@
 
 ## Introduction
 
-This repository contains my Google Data Analytics Certificate capstone project: a case study of a fictional bike-share company called Cyclistic. The project includes data analysis of the given scenario based on the six phases learned in the certificate:
-
-- [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask)
-- [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare)
-- [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process)
-- [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze)
-- share
-- act
-
-I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis.
+This repository contains the Google Data Analytics capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as a final course of the Google Data Analytics Professional Certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), [share](), and [act](). I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis. Although, to some extent, complete analysis can be done using only one of these tools, I chose to use both to demonstrate dynamic skills learned in the certificate and necessary for a data analyst.
 
 ## Scenario
 
@@ -27,7 +18,7 @@ Moreno has assigned me the first question to answer: How do annual members and c
 
 ## Ask
 
-In the ask phase, I am considering the problem I am trying to solve and how my insights can drive business decisions. The problem or business task is already defined by Moreno: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently? However, I need to keep in mind the business task and the other guiding questions when answering the question assigned to me to extract and present the most useful, actionable data insights. 
+In the ask phase, I am considering the problem I am trying to solve. The problem or business task is already defined by Moreno: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently? However, I need to keep in mind the business task and the other guiding questions when answering the question assigned to me to extract and present the most useful, actionable data insights.
 
 ## Prepare
 
@@ -46,7 +37,7 @@ This information should be sufficient to analyze the differences in bike use bet
 
 Divvy provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.  
 
-All CSV files had the same organization, namely 13 columns with the same names: 
+All CSV files have the same organization, namely 13 columns with the same names: 
 
 - ride_id
 - rideable_type
@@ -62,7 +53,7 @@ All CSV files had the same organization, namely 13 columns with the same names:
 - end_lng
 - member_casual
 
-To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the trip data from 12 CSV files to the created table.
+To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the data from 12 CSV files to the created table.
 
 ## Process
 
@@ -95,25 +86,30 @@ I began with checking the data for potential inconsistencies:
 - **Checking the range of started_at and ended_at column values:**
     - earliest started trip: "2023-06-01 00:00:44" and latest startet trip: "2024-05-31 23:59:57"
     - earliest ended trip: "2023-06-01 00:02:56" and latest ended trip: "2024-06-02 00:56:55"
-    - The trip data falls into the period from June 2023 through May 2024; there are no trips that started before and ended during the selected period, but there are trips that started at the last minutes of May 2024 and, logically, ended in June 2024 (there are 211 such trips), thus, there are no spelling errors, and trips that ended after the selected period don't necessarily need to be removed.
+    - The trip data falls into the period from June 2023 through May 2024; there are no trips that started before and ended during the selected period, but there are trips that started at the last minutes of May 2024 and, logically, ended in June 2024 (211 such trips), thus, there are no spelling errors, and trips that ended after the selected period don't need to be removed.
 
 - **Checking the consistency of station names:**
     - There are 1638 unique station names;
-    - Since there are a lot of unique station names, I checked the consistency of the station names with the help of station IDs, namely I returned station IDs with multiple station names:
-        - There are 81 station IDs with 2 station names (except one station ID with 4 station names), of which 8 station IDs have multiple names due to inconsistent spelling, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, but the rest 73 station IDs have two different station names, which is difficult to fix due to a lack of information and not necessarily needs to be, because I will use only station names in analysis.
-    - I also checked the number of observations in trip data for those 81 station IDs with multiple station names to see if I could remove them from the table:
-        - There are 378 235 such observations, and this amount is too large to be simply removed, as it can affect the analysis of several stations that may contribute to the overall analysis.
-    - The second way that I used to check the consistency of the station names was comparing stations with station information downloaded from the Divvy website and imported as a second table in pgadmin environment:
-        - All stations in a newly imported table are unique, and station IDs don't have multiple station names, however, more than half of stations don't have IDs, which makes it difficult to fix the trip data stations with the help of the stations table information;
-        - There are 48 stations in the trip_data table that don't have a match in the stations table, however, that doesn't mean that all of them have spelling inconsistencies, because some stations in the stations table also have spelling irregularities;
-        - These 48 stations have 57 189 observations in the trip data table.
-    - So the best solution for me was to fix the station names for the 9 station IDs with multiple station names mentioned earlier and don't remove other observations.
+    - Since there are a lot of unique station names, I checked their consistency with the help of station IDs, namely, I returned station IDs to which multiple station names are assigned:
+        - There are 81 station IDs with 2 station names, of which 7 station IDs have multiple names due to inconsistent spelling, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, but the rest have two different station names, which is difficult to fix due to a lack of information but not necessarily needs to be;
+        - These 81 station IDs have 378 235 observations, and this amount is too large to be simply removed, as it can affect the analysis of several stations that may contribute to the overall analysis.
+    - The second way that I used to check the consistency of the station names was by comparing stations with station information downloaded from the Divvy website and imported as a second table in pgadmin environment:
+        - All stations in a newly imported table are unique, and station IDs don't have multiple station names;
+        - There are 48 station names in the trip data table that don't have a match in the stations table, of which there are all previously found out station names with spelling inconsistencies, but the rest have minor differencies in spelling (for example, not having "St" or "Ave" in one table or another) and don't have similar 'duplicate' values, and some trip data stations are not in the stations table;
+        - These 48 station names have 57 189 observations in the trip data table.
+    - So the best solution for me was to fix the station names for the 7 station IDs with multiple station names mentioned earlier and don't remove other observations.
 
-- **Checking the range of stations latitude and longitude values:**
-    - minimum latitude: 0 and maximum latitude: 42.18
-    - minimum longitute: -88.16 and maximum longitute: 0
-    - There are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago.
-      - After checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that need to be removed.
+- **Checking the consistency of station latitude and longitude values:**
+
+    - Firstly, I checked the range of stations latitude and longitude values:
+        - minimum latitude: 0 and maximum latitude: 42.18;
+        - minimum longitute: -88.16 and maximum longitute: 0;
+        - There are zero values that are outside of the approximate minimum and maximum latitude and longitude range for Chichago;
+        - After checking station latitudes and longitudes without zero values, minimum and maximum latitude and longitude values became normal for Chichago, thus, there are observations with latitude and longitude zero values that need to be removed.
+    - Secondly, I checked for stations to which multiple very close latitude and longitude values are assigned:
+        - Almost every station has many very close latitude and longitude values (possibly due to recording devices), which will cause difficulties for Tableau in creating map visualizations by not being able to aggregate the trips by station;
+        - Therefore, I similarly checked the consistency of station latitude and longitude values in the stations table to verify if I could bring them to the trip data table:
+            - There are no stations with multiple very close latitude and longitude values, and the range of latitude and longitude values is correct, thus, I will use them to replace trip data table latitude and longitude values.
 
 - **Checking the consistency of member_casual column values:**
     - As expected, there are 2 unique member_casual values: "member" and "casual", thus there are no spelling errors.
@@ -123,8 +119,10 @@ I began with checking the data for potential inconsistencies:
 Next, based on an initial check of the data, I performed data cleaning:
 
 - **Removing observations with missing values.**
-- **Fixing inconsistent spelling of station names for 8 station IDs.**
-- **Removing observations with zero latitude and longitude values.**
+- **Fixing inconsistent spelling of station names for 7 station IDs.**
+- **Replacing latitude and longitude values with the values from the stations table.**
+    - After that, I also removed observations for trip data stations that are not in the stations table because I can't replace their latitude and longitude values.
+    - This also removed observations with missing and zero latitude and longitude values.
 
 ### Manipulating the data
 
@@ -137,21 +135,14 @@ After adding ride length column, I performed additional data check:
 - **Checking the range of ride_length column:**
     - shortest trip: "-54.57", longest trip: "11152.27"
     - Since there are possible errors and outliers, I checked trips that are shorter than a minute and longer than 1440 minutes (24 hours):
-        - There are 76 952 trip shorter than a minute and longer than 24 hours, of which 76 792 shorter than a minute (with 72 negative values) and 160 longer than 24 hours.
+        - There are 76 337 trip shorter than a minute and longer than 24 hours, of which 76 178 shorter than a minute (with 71 negative values) and 159 longer than 24 hours.
     - Trips shorter than a minute might be errors or test rides, and trips that are longer than 24 hours migth be errors or extreme cases, thus, it is better to exclude them.
     - I also checked if start_station and end_station are the same for trips shorter than a minute:
-        - From 76 792 observations with ride length shorter than one minute, 72 481 are started and ended at the same station, which to some extent can confirm that they might be errors or test rides.
+        - From 76 178 observations with ride length shorter than one minute, 71 960 are started and ended at the same station, which to some extent can confirm that they might be errors or test rides.
 
-In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 237 825 observations.
+In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 209 795 observations.
 
 ## Analyze
 
 In the analyze phace, I vizualized and analyzed the data.
-
-
-
-
-
-
-
 
