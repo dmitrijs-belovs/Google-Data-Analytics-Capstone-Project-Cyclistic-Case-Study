@@ -91,11 +91,11 @@ I began with checking the data for potential inconsistencies:
 - **Checking the consistency of station names:**
     - There are 1638 unique station names;
     - Since there are a lot of unique station names, I checked their consistency with the help of station IDs, namely, I returned station IDs to which multiple station names are assigned:
-        - There are 81 station IDs with 2 station names, of which 7 station IDs have multiple names due to inconsistent spelling, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, but the rest have two different station names, which is difficult to fix due to a lack of information but not necessarily needs to be;
+        - There are 81 station IDs with 2 station names, of which 7 station IDs have multiple names due to inconsistent spelling, for example, Buckingham - Fountain" and "Buckingham Fountain", or "Grace & Cicero" and "Grace St & Cicero Ave", and can be fixed, but the rest have two different station names, which is difficult to fix due to a lack of information and not necessarily needs to be;
         - These 81 station IDs have 378 235 observations, and this amount is too large to be simply removed, as it can affect the analysis of several stations that may contribute to the overall analysis.
     - The second way that I used to check the consistency of the station names was by comparing stations with station information downloaded from the Divvy website and imported as a second table in pgadmin environment:
         - All stations in a newly imported table are unique, and station IDs don't have multiple station names;
-        - There are 48 station names in the trip data table that don't have a match in the stations table, of which there are all previously found out station names with spelling inconsistencies, but the rest have minor differencies in spelling (for example, not having "St" or "Ave" in one table or another) and don't have similar 'duplicate' values, and some trip data stations are not in the stations table;
+        - There are 48 station names in the trip data table that don't have a match in the stations table, of which there are all previously found out station names with spelling inconsistencies, but the rest have minor differencies in spelling (for example, not having "St" or "Ave" in one table or another) and don't have similar 'duplicate' values, or simply are not in the stations table;
         - These 48 station names have 57 189 observations in the trip data table.
     - So the best solution for me was to fix the station names for the 7 station IDs with multiple station names mentioned earlier and don't remove other observations.
 
