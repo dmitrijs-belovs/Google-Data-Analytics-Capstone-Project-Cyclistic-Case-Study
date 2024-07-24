@@ -2,7 +2,16 @@
 
 ## Introduction
 
-This document is the Google Data Analytics Professional Certificate capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as the last portfolio-building course of the certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), share, and act. I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis. Although, to some extent, the analysis can be done using only one of these tools, I chose to use both to reflect the dynamic skills learned in the certificate and necessary for the data analyst job.
+This repository contains my Google Data Analytics Certificate capstone project: a case study of a fictional bike-share company called Cyclistic. The project includes data analysis of the given scenario based on the six phases learned in the certificate:
+
+- [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask)
+- [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare)
+- [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process)
+- [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze)
+- share
+- act
+
+I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis.
 
 ## Scenario
 
