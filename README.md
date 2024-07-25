@@ -144,5 +144,7 @@ In the end, I removed observations shorter than a minute and longer than 24 hour
 
 ## Analyze
 
+https://public.tableau.com/views/GoogleDataAnalyticsCapstoneProjectCyclisticCaseStudy_17219031084990/Strory?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+
 In the analyze phace, I vizualized and analyzed the data.
 
