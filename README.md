@@ -1,8 +1,10 @@
 # Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study
 
+## Table of contents
+
 ## Introduction
 
-This repository contains the Google Data Analytics capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as a final course of the Google Data Analytics Professional Certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), [share](), and [act](). I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data visualization and analysis. Although, to some extent, complete analysis can be done using only one of these tools, I chose to use both to demonstrate dynamic skills learned in the certificate and necessary for a data analyst.
+This repository contains the Google Data Analytics capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as a final course of the Google Data Analytics Professional Certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), [share](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/edit/main/README.md#analyze), and [act](). I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data analysis and visualization. Although, to some extent, complete analysis can be done using only one of these tools, I chose to use both to demonstrate dynamic skills learned in the certificate and necessary for a data analyst.
 
 ## Scenario
 
@@ -21,8 +23,6 @@ Moreno has assigned me the first question to answer: How do annual members and c
 In the ask phase, I am considering the problem I am trying to solve. The problem or business task is already defined by Moreno: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently? However, I need to keep in mind the business task and the other guiding questions when answering the question assigned to me to extract and present the most useful, actionable data insights.
 
 ## Prepare
-
-#### [SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
 
 In the prepare phase, I am describing all data sources used. The [data](https://divvy-tripdata.s3.amazonaws.com/index.html) is provided by Divvy under this [license](https://www.divvybikes.com/data-license-agreement) and will be used as fictional company Cyclistic’s historical trip data. Divvy is a real bike-share company in Chicago and the data it provides is its own data on actual trips. Thus, without getting into details, the data is ROCCC, in other words, reliable, original, comprehensive, current, and cited. Each trip is already anonymized by the company and therefore maintains privacy.
 
@@ -55,11 +55,13 @@ All CSV files have the same organization, namely 13 columns with the same names:
 
 To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the data from 12 CSV files to the created table.
 
+#### [Full SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
+
 ## Process
 
-#### [SQL query executed in the process phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/process.sql)
+In the process phase, I checked, cleaned and manipulated the data.
 
-In the process phase, I am checked, cleaned and manipulated the data. 
+#### [Full SQL query executed in the process phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/process.sql)
 
 ### Checking the data
 
@@ -142,9 +144,43 @@ After adding ride length column, I performed additional data check:
 
 In the end, I removed observations shorter than a minute and longer than 24 hours, and the final, cleaned trip data table resulted in 4 209 795 observations.
 
-## Analyze
+## Analyze and Share
 
-https://public.tableau.com/views/GoogleDataAnalyticsCapstoneProjectCyclisticCaseStudy_17219031084990/Strory?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
+I am combining analyze and share phases due to the fact that they contain the same information.
 
-In the analyze phace, I vizualized and analyzed the data.
+In these phases, I created various data visualizations that form a story in Tableau Public, which explores how members and casual riders use Cyclistic bikes differently with various questions:
+
+#### [Full story in Tableau Public created in the analyze and share phases.](https://public.tableau.com/views/GoogleDataAnalyticsCapstoneProjectCyclisticCaseStudy_17219095124900/Strory?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+- How many rides are there, and what is their average length?
+
+  ![image](https://github.com/user-attachments/assets/315a6f1c-d9ab-43d6-9350-0650653d68dd)
+
+  There are 4 209 795 total rides of which 63,83% belongs to members and 35,17% belongs to casual riders. The member's average ride length is 12.63 minutes and casual rider's 23.86.
+  
+- How do rides and average ride length change by month?
+
+  ![image](https://github.com/user-attachments/assets/c39ca3a6-fd28-4d13-baaf-8d06c8f03e23)
+
+  There are similar trends in ride count change for both user types, with the increase in trips starting in mid spring, peaking in summer and declining in mid fall. 
+
+- How do rides and average ride length change by weekday?
+
+  ![image](https://github.com/user-attachments/assets/16ade897-8d2e-40cf-8a4d-f9f545b2d085)
+
+- How do rides and average ride length change by hour?
+
+  ![image](https://github.com/user-attachments/assets/fb30bf5a-0549-4c89-ad38-88d654b1ea0c)
+
+- Which start stations are the most popular?
+
+  ![image](https://github.com/user-attachments/assets/b67ed470-ef60-4e46-9e71-1fdc0cd1585f)
+
+- Which end stations are the most popular?
+
+  ![image](https://github.com/user-attachments/assets/2411c5ef-5163-4e67-9b2c-b16e96bd68e5)
+
+- How do rides and average ride length differs by rideable type?
+
+  ![image](https://github.com/user-attachments/assets/ba2f1607-7dac-4252-aa7b-1390fc8f483f)
 
