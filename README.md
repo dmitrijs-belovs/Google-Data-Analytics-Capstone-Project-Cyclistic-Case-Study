@@ -33,7 +33,7 @@ The data contains information on:
 - rideable type (electric bike, classic bike and docked bike)
 - rider type (member and casual)
 
-This information should be sufficient to analyze the differences in bike use between annual members and casual riders by day and time of trip start, trip duration, trip start and end station, trip direction, trip length, and rideable type, and discover potential solutions and offers for converting casual riders into annual members.
+This information allows analyzing the aggregate differences in bike use between annual members and casual riders by month, day and time of trip start, trip duration, trip start and end station, and rideable type. Such decompositions should help indirectly unfold the reason why members and casual riders use Cyclistic bikes, confirmining or rejecting the initial assumption that membres use Cyclistic bikes more for commuting, whereas casual riders for recreational reasons. Besides that, this information should also help design marketing strategies aimed at converting casual riders into annual members.
 
 Divvy provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.  
 
@@ -97,7 +97,7 @@ I began with checking the data for potential inconsistencies:
         - These 81 station IDs have 378 235 observations, and this amount is too large to be simply removed, as it can affect the analysis of several stations that may contribute to the overall analysis.
     - The second way that I used to check the consistency of the station names was by comparing stations with station information downloaded from the Divvy website and imported as a second table in pgadmin environment:
         - All stations in a newly imported table are unique, and station IDs don't have multiple station names;
-        - There are 48 station names in the trip data table that don't have a match in the stations table, of which there are all previously found out station names with spelling inconsistencies, but the rest have minor differencies in spelling (for example, not having "St" or "Ave" in one table or another) and don't have similar 'duplicate' values, or simply are not in the stations table;
+        - There are 48 station names in the trip data table that don't have a match in the stations table, of which there are all previously found out station names with spelling inconsistencies, but the rest have minor differences in spelling (for example, not having "St" or "Ave" in one table or another) and don't have similar 'duplicate' values, or simply are not in the stations table;
         - These 48 station names have 57 189 observations in the trip data table.
     - So the best solution for me was to fix the station names for the 7 station IDs with multiple station names mentioned earlier and don't remove other observations.
 
@@ -146,7 +146,7 @@ In the end, I removed observations shorter than a minute and longer than 24 hour
 
 ## Analyze and Share
 
-I am combining analyze and share phases due to the fact that they contain the same information.
+I am combining analyze and share phases because in my case they contain the same information.
 
 In these phases, I created various data visualizations that form a story in Tableau Public, which explores how members and casual riders use Cyclistic bikes differently with various questions:
 
@@ -156,31 +156,56 @@ In these phases, I created various data visualizations that form a story in Tabl
 
   ![image](https://github.com/user-attachments/assets/315a6f1c-d9ab-43d6-9350-0650653d68dd)
 
-  There are 4 209 795 total rides of which 63,83% belongs to members and 35,17% belongs to casual riders. The member's average ride length is 12.63 minutes and casual rider's 23.86.
+    - There are 4 209 795 total rides of which 63,83% belongs to members and 35,17% belongs to casual riders.
+    - The member's average ride length is 12.63 minutes and casual rider's 23.86 minutes.
   
 - How do rides and average ride length change by month?
 
   ![image](https://github.com/user-attachments/assets/c39ca3a6-fd28-4d13-baaf-8d06c8f03e23)
 
-  There are similar trends in ride count change for both user types, with the increase in trips starting in mid spring, peaking in summer and declining in mid fall. 
+    - There are similar trends in ride count change by month for both user types, with the increase in rides starting after winter, peaking in summer, and declining after. However, small differences can also be seen, namely, members start to ride more frequently after winter a little faster, and have a slower decline after summer;
+    - Average ride length change by month also has similar increasing tendencies, however, the amount of increase differs significantly for user types: the increase in ride length among casual riders is much larger than among members. Besides that, the causal rider's increase in ride length starts faster and declines slower.
 
 - How do rides and average ride length change by weekday?
 
   ![image](https://github.com/user-attachments/assets/16ade897-8d2e-40cf-8a4d-f9f545b2d085)
 
+    -  Ride count change by weekday also differs by user types: members ride more in the working days and less on weekends, but casual riders ride more on weekends and less on working days. In greater detail, member's rides increase from Monday to Thursday and decrease afterwards, but casual riders ride with approximately the same frequency from Monday to Thursday but start to ride more on Friday and weekends;
+    -  Ride length by weekday differs by the fact that for members it remains approximately the same during working days and slightly increases on weekends, but for casual riders it decreases from Monday to Thursday and increases on Friday and weekends.
+
 - How do rides and average ride length change by hour?
 
   ![image](https://github.com/user-attachments/assets/fb30bf5a-0549-4c89-ad38-88d654b1ea0c)
+
+    - Ride count aggregation by hour also opens up differences between members and causal riders. First of all, we see decline during the night for both user types, but for members, the decline ends several hours earlier. Furthermore, members have the spike in rides at about 8 am, which do not have casual riders (or have in a much smaller amount proportionally). Later in the day, there are similar tendencies for both user types: a little spike at about 12 pm and the largest spike at about 17 pm.
+    - Ride length by hour tells previously explored differences, namely that ride length for casual riders changes much more. But, besides that, we see that during the day, for members, ride length increases in the evening after 17 pm, but for casual riders, ride length increases during the afternoon.
 
 - Which start stations are the most popular?
 
   ![image](https://github.com/user-attachments/assets/b67ed470-ef60-4e46-9e71-1fdc0cd1585f)
 
+    - Map visualizations of the 20 most popular start stations also show some differences between user types. Members start their rides more near universities, commercial, and residential areas, whereas casual riders start their rides near parks, museums, and other recreational sites.
+
 - Which end stations are the most popular?
 
   ![image](https://github.com/user-attachments/assets/2411c5ef-5163-4e67-9b2c-b16e96bd68e5)
 
+    - The same goes also with end stations: members end their rides more near universities, commercial, and residential areas, and casual riders end their rides near parks, museums, and other recreational sites.
+
 - How do rides and average ride length differs by rideable type?
 
   ![image](https://github.com/user-attachments/assets/ba2f1607-7dac-4252-aa7b-1390fc8f483f)
+
+    - Decomposition of rides by rideable type for user types looks similar, except there is a small amount of docked bike rides among casual riders, and their length is much larger (which can be due to that comparatively small amount of rides).
+ 
+So, all these insights cumulatively reinforce the initial assumption that members and casual riders use Cyclistic bikes for different purposes: 
+
+- Mebmers generally use Cyclistic bikes for shorter rides, they ride more than casual riders during the spring and fall, working days, and peak hours during which people are usually commute to study or work, and they start and end their rides near universities, commercial, and residential areas. Therefore, I can conclude that members generally use Cyclistic bikes more for commuting.
+- Casul riders, on the other hand, ride longer, more during the summer, weekends, and later in the day, and they start and end their rides near parks, museums, and other recreational sites. Thus, I can conclude that casaul riders generally use Cyclistic bikes for recreational reasons.
+
+In the next section, I will discuss how all of these insights can help design marketing strategies aimed at converting casual riders into annual members.
+
+## Act
+
+
 
