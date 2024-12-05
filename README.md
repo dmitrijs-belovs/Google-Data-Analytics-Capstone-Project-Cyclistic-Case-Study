@@ -2,23 +2,15 @@
 
 ## Introduction
 
-This repository contains the Google Data Analytics capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as a final course of the Google Data Analytics Professional Certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#analyze-and-share), [share](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#analyze-and-share), and [act](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#act). I used PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data analysis and visualization. Although, to some extent, complete analysis can be done using only one of these tools, I chose to use both to demonstrate dynamic skills learned in the certificate and necessary for a data analyst.
+This repository contains the Google Data Analytics capstone project, a case study of a fictional bike-share company called Cyclistic, that I completed as a final course of the Google Data Analytics Professional Certificate. The project includes data analysis of the given scenario based on the six phases learned in the certificate: [ask](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#ask), [prepare](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#prepare), [process](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#process), [analyze](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#analyze-and-share), [share](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#analyze-and-share), and [act](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study?tab=readme-ov-file#act). I use PostgreSQL in pgAdmin 4 for data preparation and processing, and Tableau Public for data analysis and visualization.
 
 ## Scenario
 
-I am a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. Cyclistic launched in 2016 and since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime.
-
-Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members.
-
-Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, Moreno believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, Moreno believes there is a very good chance to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.
-
-Moreno has set a clear goal: Design marketing strategies aimed at converting casual riders into annual members. In order to do that, however, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics.
-
-Moreno has assigned me the first question to answer: How do annual members and casual riders use Cyclistic bikes differently? I need to answer this question with compelling data insights and professional data visualizations.
+I am a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments by offering flexibile pricing plans: single-ride passes, full-day passes, and annual memberships. Recently, Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. The director of marketing believes that there is a very good chance to convert casual riders into members. Therefore, rather than creating a marketing campaign that targets all-new customers, he set a goal to design marketing strategies aimed at converting casual riders into annual members. In order to do that, the marketing analyst team needs to better understand how annual members and casual riders differ, why casual riders would buy a membership, and how digital media could affect their marketing tactics.
 
 ## Ask
 
-In the ask phase, I am considering the problem I am trying to solve. The problem or business task is already defined by Moreno: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently? However, I need to keep in mind the business task and the other guiding questions when answering the question assigned to me to extract and present the most useful, actionable data insights.
+In the ask phase, I am considering the problem I am trying to solve. The problem or business task is already defined by the director of marketing: Design marketing strategies aimed at converting casual riders into annual members. The guiding questions are also defined, and one of them was assigned to me: How do annual members and casual riders use Cyclistic bikes differently?
 
 ## Prepare
 
@@ -31,27 +23,11 @@ The data contains information on:
 - rideable type (electric bike, classic bike and docked bike)
 - rider type (member and casual)
 
-This information allows analyzing the aggregate differences in bike use between annual members and casual riders by month, day and time of trip start, trip duration, trip start and end station, and rideable type. Such decompositions should help indirectly unfold the reason why members and casual riders use Cyclistic bikes, confirmining or rejecting the initial assumption that membres use Cyclistic bikes more for commuting, whereas casual riders for recreational reasons. Besides that, this information should also help design marketing strategies aimed at converting casual riders into annual members.
+This information allows analyzing the aggregate differences in bike use between annual members and casual riders by month, day and time of trip start, trip duration, trip start and end station, and rideable type.
 
-Divvy provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.  
+Divvy provides two types of data for download: monthly trip data and quarter trip data. Two options are suggested by course instructor: to work with an entire year of data, or just one quarter of a year. I chose to work with monthly trip data for the entire year from June 2023 through May 2024, which was the most recent period at the moment of completing the project, and downloaded 12 CSV files corresponding to each month in that period.
 
-All CSV files have the same organization, namely 13 columns with the same names: 
-
-- ride_id
-- rideable_type
-- started_at
-- ended_at
-- start_station_name
-- start_station_id
-- end_station_name
-- end_station_id
-- start_lat
-- start_lng
-- end_lat
-- end_lng
-- member_casual
-
-To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the data from 12 CSV files to the created table.
+To prepare the data for processing, I imported it into the pgAdmin environment by creating a new table trip_data and copying the data from 12 CSV files to the created table (all CSV files have the same number of columns and column names).
 
 #### [Full SQL query executed in the prepare phase.](https://github.com/dmitrijs-belovs/Google-Data-Analytics-Capstone-Project-Cyclistic-Case-Study/blob/main/prepare.sql)
 
@@ -196,7 +172,7 @@ In these phases, I created various data visualizations that form a story in Tabl
 
     - Decomposition of rides by rideable type for user types looks similar, except there is a small amount of docked bike rides among casual riders, and their length is much larger (which can be due to that comparatively small amount of rides).
  
-So, all these insights cumulatively reinforce the initial assumption that members and casual riders use Cyclistic bikes for different purposes: 
+So, all these insights cumulatively reinforce the fact that members and casual riders use Cyclistic bikes for different purposes: 
 
 - Mebmers generally use Cyclistic bikes for shorter rides, they ride more than casual riders during the spring and fall, working days, and peak hours during which people are usually commute to study or work, and they start and end their rides near universities, commercial, and residential areas. Therefore, I can conclude that members generally use Cyclistic bikes more for commuting.
 - Casual riders, on the other hand, ride longer, more during the summer, weekends, and later in the day, and they start and end their rides near parks, museums, and other recreational sites. Thus, I can conclude that casual riders generally use Cyclistic bikes for recreational reasons.
@@ -215,7 +191,3 @@ In the act phase, I am suggesting how my data analysis insights can be used in d
 
 - The insigths that casual riders ride more during warmer months and for recreational purposes suggest that a new plan for warmer season and recreation can be created and offered to the casual riders.
     - However, this suggestion is an additional option because it doesn't meet the goal of the project to convert casual riders to annual members.
- 
-
-
-
